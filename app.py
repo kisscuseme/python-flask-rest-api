@@ -32,7 +32,7 @@ def get_env(name):
 def connect_db():
     try:
         return mariadb.connect(
-            user=get_env('USER'),
+            user=get_env('USERNAME'),
             password=get_env('PASSWORD'),
             host=get_env('HOST'),
             port=int(get_env('PORT')),
