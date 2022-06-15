@@ -78,5 +78,5 @@ if __name__ == "__main__":
 # INSERT INTO bls_record(nickname, score) VALUES('TEST4', 16.421);
 # select nickname, score from bls_record order by score desc limit 0, 3;
 
-# curl -X POST -H "Content-Type: application/json" http://localhost:8080/get_bls_record
-# curl -X POST -H "Content-Type: application/json" -d '{"nickname":"bbbb","score":"333.222"}' http://localhost:8080/set_bls_record
+# curl -X POST -H "Content-Type: application/json" http://132.226.16.71:8080/get_bls_record
+# curl -X POST -H "Content-Type: application/json" -d '{"nickname":"test","score":"2.123"}' http://132.226.16.71:8080/set_bls_record
