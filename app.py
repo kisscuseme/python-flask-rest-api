@@ -5,20 +5,20 @@ import json
 from dotenv import load_dotenv
 import os
 
-app = Flask(__name__)
+application = Flask(__name__)
 conn = None
 
-@app.route('/')
+@application.route('/')
 def index():
     return 'Simple Game Wannabe'
 
-@app.route('/get_bls_record', methods=['POST'])
+@application.route('/get_bls_record', methods=['POST'])
 def get_bls_record():
     if request.method == 'POST':
         result = json.dumps(get_record(100))
         return result, status.HTTP_200_OK, {"Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*"}
 
-@app.route('/set_bls_record', methods=['POST'])
+@application.route('/set_bls_record', methods=['POST'])
 def set_bls_record():
     if request.method == 'POST':
         if request.is_json:
@@ -62,11 +62,9 @@ def set_record(nickname, score):
     except mariadb.Error as e:
         print(e)
 
-if __name__ == "__main__":
+if __name__ == "app":
     load_dotenv()
     conn = connect_db()
-    app.run()
-
 
 # DROP TABLE bls_record;
 # CREATE TABLE bls_record(id INT NOT NULL AUTO_INCREMENT, nickname VARCHAR(20) NOT NULL, score DECIMAL(7,3) NOT NULL, PRIMARY KEY (id));
