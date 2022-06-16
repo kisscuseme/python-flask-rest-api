@@ -48,7 +48,7 @@ def get_record(limit):
         cur = conn.cursor()
         cur.execute(sql)
         for data in cur:
-            result.append({'fields':{'nickname': {'stringValue':data[0]}, 'score': {'doubleValue':str(data[1])}}})
+            result.append({'fields':{'nickname': {'stringValue':data[0]}, 'value': {'doubleValue':str(data[1])}}})
         return result
     except mariadb.Error as e:
         print(e)
