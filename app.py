@@ -65,8 +65,7 @@ def set_record(nickname, score):
 if __name__ == "__main__":
     load_dotenv()
     conn = connect_db()
-    from waitress import serve
-    serve(app, host="0.0.0.0", port=80)
+
 
 # DROP TABLE bls_record;
 # CREATE TABLE bls_record(id INT NOT NULL AUTO_INCREMENT, nickname VARCHAR(20) NOT NULL, score DECIMAL(7,3) NOT NULL, PRIMARY KEY (id));
