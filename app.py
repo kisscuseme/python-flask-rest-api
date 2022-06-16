@@ -43,12 +43,16 @@ def connect_db():
 
 def get_record(limit):
     try:
-        sql = 'SELECT nickname, score FROM bls_record ORDER BY score DESC LIMIT 0, ' + str(limit)
+        sql = 'SELECT id, nickname, score FROM bls_record ORDER BY score DESC LIMIT 0, ' + str(limit)
         result = []
         cur = conn.cursor()
         cur.execute(sql)
         for data in cur:
-            result.append({'fields':{'nickname': {'stringValue':data[0]}, 'value': {'doubleValue':str(data[1])}}})
+            result.append({'fields':{
+                'id': {'integerValue':data[0]},
+                'nickname': {'stringValue':data[1]},
+                'score': {'doubleValue':str(data[2])}
+                }})
         return result
     except mariadb.Error as e:
         print(e)
