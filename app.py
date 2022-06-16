@@ -65,6 +65,7 @@ def set_record(nickname, score):
 if __name__ == "__main__":
     load_dotenv()
     conn = connect_db()
+    app.run()
 
 
 # DROP TABLE bls_record;
