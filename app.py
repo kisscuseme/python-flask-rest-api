@@ -49,9 +49,9 @@ def get_record(limit):
         cur.execute(sql)
         for data in cur:
             result.append({
-                'id': data[0],
+                'id': str(data[0]),
                 'nickname': data[1],
-                'score': data[2]
+                'score': str(data[2])
                 })
         return result
     except mariadb.Error as e:
