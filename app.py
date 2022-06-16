@@ -65,16 +65,3 @@ def set_record(nickname, score):
 if __name__ == "app":
     load_dotenv()
     conn = connect_db()
-
-# DROP TABLE bls_record;
-# CREATE TABLE bls_record(id INT NOT NULL AUTO_INCREMENT, nickname VARCHAR(20) NOT NULL, score DECIMAL(7,3) NOT NULL, PRIMARY KEY (id));
-# CREATE OR REPLACE INDEX score_idx ON bls_record (score);
-# INSERT INTO bls_record(nickname, score) VALUES('TEST', 112.121);
-# INSERT INTO bls_record(nickname, score) VALUES('TEST1', 33.321);
-# INSERT INTO bls_record(nickname, score) VALUES('TEST2', 14.121);
-# INSERT INTO bls_record(nickname, score) VALUES('TEST3', 125.122);
-# INSERT INTO bls_record(nickname, score) VALUES('TEST4', 16.421);
-# select nickname, score from bls_record order by score desc limit 0, 3;
-
-# curl -X POST -H "Content-Type: application/json" http://132.226.16.71:8080/get_bls_record
-# curl -X POST -H "Content-Type: application/json" -d '{"nickname":"test","score":"2.123"}' http://132.226.16.71:8080/set_bls_record
