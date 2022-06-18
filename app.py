@@ -15,7 +15,7 @@ def index():
 def get_bls_record():
     if request.method == 'POST':
         result = json.dumps(get_record(100))
-        return result, status.HTTP_200_OK, {"Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*"}
+        return result, status.HTTP_200_OK
 
 @application.route('/set_bls_record', methods=['POST'])
 def set_bls_record():
@@ -23,7 +23,7 @@ def set_bls_record():
         if request.is_json:
             params = request.get_json()
             set_record(params['nickname'], params['score'])
-            return {"result_code": "0000"}, status.HTTP_200_OK, {"Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*"}
+            return {"result_code": "0000"}, status.HTTP_200_OK
 
 def get_env(name):
     return os.environ.get(name)
