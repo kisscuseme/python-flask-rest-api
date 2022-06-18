@@ -15,7 +15,6 @@ def index():
 def get_bls_record():
     if request.method == 'POST':
         result = json.dumps(get_record(100))
-        
     else:
         result = {"result_code": "999", "message": "Request method is not POST."}
     
