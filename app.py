@@ -11,19 +11,30 @@ application = Flask(__name__)
 def index():
     return 'Simple Game Wannabe'
 
-@application.route('/get_bls_record', methods=['POST'])
+@application.route('/get_bls_record', methods=['GET', 'POST'])
 def get_bls_record():
     if request.method == 'POST':
         result = json.dumps(get_record(100))
-        return result, status.HTTP_200_OK
+        
+    else:
+        result = {"result_code": "999", "message": "Request method is not POST."}
+    
+    return result, status.HTTP_200_OK
 
-@application.route('/set_bls_record', methods=['POST'])
+@application.route('/set_bls_record', methods=['GET', 'POST'])
 def set_bls_record():
     if request.method == 'POST':
         if request.is_json:
             params = request.get_json()
             set_record(params['nickname'], params['score'])
-            return {"result_code": "0000"}, status.HTTP_200_OK
+            result = {"result_code": "000"}
+        else:
+            result = {"result_code": "100", "message": "Request format is not JSON."}
+
+    else:
+        result = {"result_code": "999", "message": "Request method is not POST."}
+    
+    return result, status.HTTP_200_OK
 
 def get_env(name):
     return os.environ.get(name)
