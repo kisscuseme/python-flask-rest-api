@@ -72,3 +72,6 @@ def set_record(nickname, score):
 if __name__ == "app":
     load_dotenv()
     conn = connect_db()
+
+if __name__ == "__main__":
+    application.run(host="localhost", posrt="5000")
