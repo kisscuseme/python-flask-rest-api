@@ -32,8 +32,15 @@ def set_bls_record():
             mix = (str(score) + nickname).replace(".",get_env('USERNAME'))
             compare = hashlib.sha256(mix.encode()).hexdigest()
             if key == compare:
-                set_record(nickname, score)
-                result = {"result_code": "000"}
+                dupl = False
+                for record in get_record(100):
+                    if record["nickname"] == nickname and record["score"] == score:
+                        result = True
+                if dupl:
+                    result = {"result_code": "300", "message": "Duplicate records with the same name cannot be entered."}
+                else:
+                    set_record(nickname, score)
+                    result = {"result_code": "000"}
             else:
                 result = {"result_code": "200", "message": "The key is not valid."}
         else:
