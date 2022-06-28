@@ -35,7 +35,7 @@ def set_bls_record():
                 dupl = False
                 for record in get_record(100):
                     if record["nickname"] == nickname and record["score"] == score:
-                        result = True
+                        dupl = True
                 if dupl:
                     result = {"result_code": "300", "message": "Duplicate records with the same name cannot be entered."}
                 else:
