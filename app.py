@@ -4,6 +4,7 @@ import mariadb
 import json
 from dotenv import load_dotenv
 import os
+import hashlib
 
 application = Flask(__name__)
 
@@ -25,8 +26,16 @@ def set_bls_record():
     if request.method == 'POST':
         if request.is_json:
             params = request.get_json()
-            set_record(params['nickname'], params['score'])
-            result = {"result_code": "000"}
+            score = params['score']
+            nickname = params['nickname']
+            key = params['key']
+            mix = (score + nickname).replace(".",get_env('USERNAME'))
+            compare = hashlib.sha256(mix.encode()).hexdigest()
+            if key == compare:
+                set_record(nickname, score)
+                result = {"result_code": "000"}
+            else:
+                result = {"result_code": "200", "message": "The key is not valid."}
         else:
             result = {"result_code": "100", "message": "Request format is not JSON."}
 
