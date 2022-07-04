@@ -79,7 +79,8 @@ def translate(text_list, src, dest):
         }
     }
     for text in text_list:
-        result['data']['translations'].append(translator.translate(text, src=src, dest=dest).text)
+        translated = {'translatedText':translator.translate(text, src=src, dest=dest).text}
+        result['data']['translations'].append(translated)
     return result
 
 def get_env(name):
