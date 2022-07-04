@@ -5,6 +5,7 @@ import json
 from dotenv import load_dotenv
 import os
 import hashlib
+from googletrans import Translator
 
 application = Flask(__name__)
 
@@ -50,6 +51,36 @@ def set_bls_record():
         result = {"result_code": "999", "message": "Request method is not POST."}
     
     return result, status.HTTP_200_OK
+
+@application.route('/trans_lang', methods=['GET', 'POST'])
+def trans_lang():
+    try:
+        if request.method == 'POST':
+            params = request.get_json()
+            source = params.get('source')
+            target = params.get('target')
+            q = params.get('q')
+            if q is not None:
+                result = json.dumps(translate(q, source, target))
+            else:
+                result = {}
+        else:
+            result = {"result_code": "999", "message": "Request method is not POST."}
+    except Exception as e:
+        result = e.with_traceback()
+    
+    return result, status.HTTP_200_OK
+
+def translate(text_list, src, dest):
+    translator = Translator()
+    result  = {
+        "data": {
+            "translations": []
+        }
+    }
+    for text in text_list:
+        result['data']['translations'].append(translator.translate(text, src=src, dest=dest).text)
+    return result
 
 def get_env(name):
     return os.environ.get(name)
@@ -100,4 +131,4 @@ if __name__ == "app":
     conn = connect_db()
 
 if __name__ == "__main__":
-    application.run(host="localhost", posrt="5000")
+    application.run(host="localhost", port="5000")
