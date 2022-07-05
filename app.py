@@ -76,7 +76,7 @@ def translate(text_list, src, dest):
     result  = []
     for text in text_list:
         translated = {'translatedText':translator.translate(text, src=src, dest=dest).text}
-        result.append(translated)
+        result.append(str(translated, 'utf-8'))
     return {
         "data": {
             "translations": result
